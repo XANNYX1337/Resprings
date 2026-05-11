@@ -535,6 +535,57 @@
             transform: translateY(-2px);
         }
 
+        .cat-sound {
+            position: fixed;
+            left: 18px;
+            bottom: 18px;
+            z-index: 25;
+            width: 86px;
+            height: 86px;
+            padding: 0;
+            border: 0;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.34);
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.45),
+                0 16px 36px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            overflow: hidden;
+            backdrop-filter: blur(18px) saturate(160%);
+            -webkit-backdrop-filter: blur(18px) saturate(160%);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .cat-sound:hover {
+            transform: translateY(-3px) scale(1.04);
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.55),
+                0 20px 44px rgba(0, 0, 0, 0.28);
+        }
+
+        .cat-sound img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        body.minimal .cat-sound {
+            background: rgba(24, 24, 26, 0.72);
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.12),
+                0 16px 36px rgba(0, 0, 0, 0.58),
+                0 0 18px rgba(255, 255, 255, 0.07);
+        }
+
+        body.blood .cat-sound {
+            background: rgba(35, 0, 8, 0.72);
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.12),
+                0 16px 38px rgba(120, 0, 0, 0.45),
+                0 0 22px rgba(255, 0, 36, 0.16);
+        }
+
         @media (max-width: 520px) {
             header {
                 border-radius: 24px;
@@ -650,6 +701,12 @@
     © 2026 Resprings
 </footer>
 
+<button class="cat-sound" type="button" onclick="playCatSound()" aria-label="Проиграть мяу">
+    <img src="https://66.media.tumblr.com/ac34ec58e3ac81f7699ef8af09528ce2/tumblr_ob5uq1gqSi1us2o6lo1_250.gif" alt="">
+</button>
+
+<audio id="catAudio" preload="auto" src="https://www.myinstants.com/media/sounds/miau-koshka.mp3"></audio>
+
 <div class="switch" onclick="toggleStyle()">Сменить стиль</div>
 
 <script>
@@ -673,6 +730,12 @@ function showSection(sectionId, button) {
     });
 
     button.classList.add("active");
+}
+
+function playCatSound() {
+    const audio = document.getElementById("catAudio");
+    audio.currentTime = 0;
+    audio.play();
 }
 </script>
 
